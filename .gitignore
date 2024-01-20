@@ -61,3 +61,12 @@ Thumbs.db.meta
 
 # VS Code
 *.vscode
+
+#EasyRoad which we were trying
+Assets/EasyRoads3D
+Assets/EasyRoads3D scenes
+
+#Otherss
+Assets/Fantasy Forest Environment Free Sample
+RoadArchitect
+RoadArchitect.csproj
