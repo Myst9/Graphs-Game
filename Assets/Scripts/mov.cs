@@ -9,7 +9,10 @@ public class move : MonoBehaviour
 
     public Rigidbody rb;
 
+    int coins = 0;
+    public float dead_y = -50;
     Vector3 movem;
+
 
     // Update is called once per frame
     void Update()
@@ -18,6 +21,16 @@ public class move : MonoBehaviour
         movem.z = Input.GetAxisRaw("Vertical");
         movem.y = 0;
         change(movem);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            coins++;
+            Debug.Log("Coins: " + coins);
+        }
     }
 
     void change(Vector3 movem)
