@@ -18,6 +18,8 @@ public class move : MonoBehaviour
 
 
     public Transform orientation;
+    public GameObject cam;
+
 
     public float rotationRate;
     public Rigidbody rb;
@@ -41,7 +43,7 @@ public class move : MonoBehaviour
     {
         groundCheck();
         speedControl();
-        getInput();
+       
         //Debug.Log("Prev Movem: " + movem);
         //movem = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z) * movem;
         //movem = Quaternion.Euler(xRot, yRot, zRot) * movem;
@@ -52,7 +54,11 @@ public class move : MonoBehaviour
             translate(movem);
         }*/
         //Debug.Log("Post Movem: " + movem);
-        moveplayer();
+        if (cam.activeSelf)
+        {
+            getInput();
+            moveplayer();
+        }
 
     }
 
@@ -98,7 +104,7 @@ public class move : MonoBehaviour
         movedir= orientation.forward* vertical_input + orientation.right* horizontal_input;
         if (movedir == Vector3.zero)
         {
-            rb.velocity = new Vector3(rb.velocity.x/3, rb.velocity.y/3,rb.velocity.z/3);
+            rb.velocity = new Vector3(rb.velocity.x/2, rb.velocity.y/2,rb.velocity.z/2);
         }
         else
         {
