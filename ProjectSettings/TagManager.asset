@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Coin
   - Copy
+  - Logic
   layers:
   - Default
   - TransparentFX
