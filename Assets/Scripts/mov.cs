@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class move : MonoBehaviour
 {
     [Header("Movement")] 
@@ -16,6 +18,7 @@ public class move : MonoBehaviour
     public float playerHeight;
 
 
+    public Logic l;
 
     public Transform orientation;
     public GameObject cam;
@@ -23,7 +26,7 @@ public class move : MonoBehaviour
 
     public float rotationRate;
     public Rigidbody rb;
-    int coins = 0;
+    //int coins = 0;
     public float dead_y = -50;
 
 
@@ -36,6 +39,7 @@ public class move : MonoBehaviour
     {
         //rb = GetComponent<Rigidbody>();
         rb.freezeRotation= true;
+        l = GameObject.FindGameObjectWithTag("Logic").GetComponent<Logic>();
     }
 
     // Update is called once per frame
@@ -77,19 +81,17 @@ public class move : MonoBehaviour
         {
             rb.drag = groundDrag;
         }
-        else
-        {
-            rb.drag = 0;
-        }
+        
     }
+
+    
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Coin"))
         {
+            l.addScore(1);
             Destroy(other.gameObject);
-            coins++;
-            Debug.Log("Coins: " + coins);
         }
     }
 
@@ -109,7 +111,8 @@ public class move : MonoBehaviour
         else
         {
             rotate();
-            rb.AddForce(movedir.normalized * moveSpeed * 10f, ForceMode.Force);
+            rb.velocity = movedir.normalized * moveSpeed;
+            //rb.AddForce(movedir.normalized * moveSpeed*2f, ForceMode.Force);
         }
         
     }
