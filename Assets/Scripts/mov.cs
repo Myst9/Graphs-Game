@@ -2,114 +2,127 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move : MonoBehaviour
+
+
+public class move : MonoBehaviour
 {
+    [Header("Movement")] 
     public float moveSpeed = 5f;
+    // Start is called before the first frame update
+
+    public float groundDrag;
+
+    [Header("GroundCheck")]
+    bool is_grounded;
+    public LayerMask groundMask;
+    public float playerHeight;
+
+
+    public Logic l;
+
+    public Transform orientation;
+    public GameObject cam;
+
+
+    public float rotationRate;
     public Rigidbody rb;
-    private Road currentRoad;
-    private bool hasEnteredRoad = false;
+    //int coins = 0;
+    public float dead_y = -50;
 
-    private static Move currentlySelectedCar;
 
+    float horizontal_input;
+    float vertical_input;
+    Vector3 movedir;
+
+
+    private void Start()
+    {
+        //rb = GetComponent<Rigidbody>();
+        rb.freezeRotation= true;
+        l = GameObject.FindGameObjectWithTag("Logic").GetComponent<Logic>();
+    }
+
+    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        groundCheck();
+        speedControl();
+       
+        //Debug.Log("Prev Movem: " + movem);
+        //movem = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z) * movem;
+        //movem = Quaternion.Euler(xRot, yRot, zRot) * movem;
+        /*movem = movem.normalized;
+        if (movem != Vector3.zero)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                Move clickedCar = hit.collider.GetComponent<Move>();
-
-                if (clickedCar != null)
-                {
-                    if (currentlySelectedCar != null && currentlySelectedCar != clickedCar)
-                    {
-                        currentlySelectedCar.Deselect();
-                    }
-
-                    clickedCar.Select();
-                }
-            }
+            rotate(movem);
+            translate(movem);
+        }*/
+        //Debug.Log("Post Movem: " + movem);
+        if (cam.activeSelf)
+        {
+            getInput();
+            moveplayer();
         }
 
-        if (currentlySelectedCar != null)
+    }
+
+    private void speedControl()
+    {
+        Vector3 curr = new Vector3(rb.velocity.x,0,rb.velocity.z);
+        if(curr.magnitude > moveSpeed) {
+            curr = curr.normalized * moveSpeed;
+            rb.velocity = new Vector3(curr.x, rb.velocity.y, curr.z);
+        }
+    }
+    void groundCheck()
+    {
+        is_grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);
+        if (is_grounded)
         {
-            currentlySelectedCar.MoveSelectedCar();
+            rb.drag = groundDrag;
+        }
+        
+    }
+
+    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            l.addScore(1);
+            Destroy(other.gameObject);
         }
     }
 
-    void Select()
+    void getInput()
     {
-        currentlySelectedCar = this;
+        horizontal_input = Input.GetAxisRaw("Horizontal");
+        vertical_input = Input.GetAxisRaw("Vertical");
     }
 
-    void Deselect()
+    void moveplayer()
     {
-        currentlySelectedCar = null;
-    }
-
-    void MoveSelectedCar()
-    {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-
-        Vector3 movement = new Vector3(horizontalInput, 0, verticalInput).normalized;
-
-        if (movement != Vector3.zero)
+        movedir= orientation.forward* vertical_input + orientation.right* horizontal_input;
+        if (movedir == Vector3.zero)
         {
-            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, Time.deltaTime * 360f);
-        }
-
-        MoveCar(movement);
-    }
-
-    void MoveCar(Vector3 movement)
-    {
-        if (!currentRoad)
-        {
-            Debug.Log("No road");
-            hasEnteredRoad = false; // Reset the flag if the car is not on any road
-        }
-
-        if (currentRoad != null && currentRoad.CanCarMove())
-        {
-            rb.MovePosition(rb.position + movement * Time.deltaTime * moveSpeed);
-            if (!hasEnteredRoad)
-            {
-                Debug.Log("Moving car");
-                currentRoad.CarEntered();
-                hasEnteredRoad = true; // Set the flag to true after entering the road
-            }
+            rb.velocity = new Vector3(rb.velocity.x/2, rb.velocity.y/2,rb.velocity.z/2);
         }
         else
         {
-            if (hasEnteredRoad)
-            {
-                Debug.Log("Cannot move on this road");
-                hasEnteredRoad = false; // Reset the flag when exiting the road
-            }
+            rotate();
+            rb.velocity = movedir.normalized * moveSpeed;
+            //rb.AddForce(movedir.normalized * moveSpeed*2f, ForceMode.Force);
         }
+        
     }
-
-    void OnTriggerEnter(Collider other)
+    /*void translate(Vector3 movem)
     {
-        Road road = other.GetComponent<Road>();
-        if (road != null)
-        {
-            currentRoad = road;
-        }
-    }
-
-    void OnTriggerExit(Collider other)
+        rb.MovePosition(rb.position + movem * Time.deltaTime * moveSpeed);
+    }*/
+    void rotate()
     {
-        Road road = other.GetComponent<Road>();
-        if (road != null)
-        {
-            currentRoad.CarExited();
-            currentRoad = null;
-        }
+        Quaternion toRotate = Quaternion.LookRotation(movedir, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, Time.deltaTime * rotationRate);
     }
 }
