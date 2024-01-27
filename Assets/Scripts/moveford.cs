@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move : MonoBehaviour
+public class moveford : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Rigidbody rb;
     private Road currentRoad;
     private bool hasEnteredRoad = false;
 
-    private static Move currentlySelectedCar;
+    private static moveford currentlySelectedCar;
 
     void Update()
     {
@@ -20,7 +20,7 @@ public class Move : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                Move clickedCar = hit.collider.GetComponent<Move>();
+                moveford clickedCar = hit.collider.GetComponent<moveford>();
 
                 if (clickedCar != null)
                 {
@@ -36,7 +36,7 @@ public class Move : MonoBehaviour
 
         if (currentlySelectedCar != null)
         {
-            currentlySelectedCar.MoveSelectedCar();
+            currentlySelectedCar.movefordSelectedCar();
         }
     }
 
@@ -50,7 +50,7 @@ public class Move : MonoBehaviour
         currentlySelectedCar = null;
     }
 
-    void MoveSelectedCar()
+    void movefordSelectedCar()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
@@ -63,10 +63,10 @@ public class Move : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, Time.deltaTime * 360f);
         }
 
-        MoveCar(movement);
+        movefordCar(movement);
     }
 
-    void MoveCar(Vector3 movement)
+    void movefordCar(Vector3 movement)
     {
         if (!currentRoad)
         {
