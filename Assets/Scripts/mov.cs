@@ -45,7 +45,6 @@ public class move : MonoBehaviour
         timer = 0; 
         l = GameObject.FindGameObjectWithTag("Logic").GetComponent<Logic>();
         cs = GameObject.FindGameObjectWithTag("GameController").GetComponent<CamSwitch>();
-<<<<<<< Updated upstream
     }
 
     void checkTime()
@@ -59,8 +58,6 @@ public class move : MonoBehaviour
             timer = 0;
             gameObject.SetActive(false);
         }
-=======
->>>>>>> Stashed changes
     }
 
     // Update is called once per frame
@@ -117,7 +114,6 @@ public class move : MonoBehaviour
         else if (other.gameObject.CompareTag("Done"))
         {
             Debug.Log("Player i done");
-<<<<<<< Updated upstream
             //Destroy(gameObject);
             gameObject.SetActive(false);
             Destroy(other.gameObject);
@@ -128,13 +124,6 @@ public class move : MonoBehaviour
         else//Must be a spawner
         {
             dead_time += 300;
-=======
-            Destroy(gameObject);
-            Destroy(other.gameObject);
-            cam.SetActive(false);
-            cs.cam10.SetActive(true);
-            Destroy(cam);
->>>>>>> Stashed changes
         }
     }
 
