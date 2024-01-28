@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class Move : MonoBehaviour
+public class move_dfs : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public Rigidbody rb;
     int coins = 0;
+    public Logic_dfs l;
+    private int coinsCollected = 0;
+
 
     void Update()
     {
@@ -32,21 +35,55 @@ public class Move : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Coin"))
         {
+            l.addScore(1);
+            coinsCollected++;
+
+            if (coinsCollected == 8)
+            {
+                Debug.Log("Gameover! You collected 8 items.");
+            }
             Destroy(other.gameObject);
-            coins++;
-            Debug.Log("Coins: " + coins);
         }
-        else if (other.gameObject.CompareTag("hint1") ||
-                 other.gameObject.CompareTag("hint2") ||
-                 other.gameObject.CompareTag("hint3") ||
-                 other.gameObject.CompareTag("hint4") ||
-                 other.gameObject.CompareTag("hint5") ||
-                 other.gameObject.CompareTag("hint6") ||
-                 other.gameObject.CompareTag("hint7") ||
-                 other.gameObject.CompareTag("hint8"))
+        else if (other.gameObject.CompareTag("hint1"))
+        {
+            hint1_dfs hintController = other.GetComponentInChildren<hint1_dfs>();
+            hintController?.ShowHint();
+        }
+        else if (other.gameObject.CompareTag("hint2"))
+        {
+            hint2_dfs hintController = other.GetComponentInChildren<hint2_dfs>();
+            hintController?.ShowHint();
+        }
+        else if (other.gameObject.CompareTag("hint3"))
+        {
+            hint2_dfs hintController = other.GetComponentInChildren<hint2_dfs>();
+            hintController?.ShowHint();
+        }
+        else if (other.gameObject.CompareTag("hint4"))
+        {
+            hint1_dfs hintController = other.GetComponentInChildren<hint1_dfs>();
+            hintController?.ShowHint();
+        }
+        else if (other.gameObject.CompareTag("hint5"))
+        {
+            hint1_dfs hintController = other.GetComponentInChildren<hint1_dfs>();
+            hintController?.ShowHint();
+        }
+        else if (other.gameObject.CompareTag("hint6"))
+        {
+            hint3_dfs hintController = other.GetComponentInChildren<hint3_dfs>();
+            hintController?.ShowHint();
+        }
+        else if (other.gameObject.CompareTag("hint7"))
+        {
+            hint1_dfs hintController = other.GetComponentInChildren<hint1_dfs>();
+            hintController?.ShowHint();
+        }
+        else if (other.gameObject.CompareTag("hint8"))
         {
             hint1_dfs hintController = other.GetComponentInChildren<hint1_dfs>();
             hintController?.ShowHint();
         }
     }
+
 }

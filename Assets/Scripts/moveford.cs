@@ -7,7 +7,8 @@ public class moveford : MonoBehaviour
     public float moveSpeed = 5f;
     public Rigidbody rb;
     private Road currentRoad;
-    private bool hasEnteredRoad = false;
+    private bool OnRoad = false;
+    private bool entered = false;
 
     private static moveford currentlySelectedCar;
 
@@ -71,26 +72,30 @@ public class moveford : MonoBehaviour
         if (!currentRoad)
         {
             Debug.Log("No road");
-            hasEnteredRoad = false; // Reset the flag if the car is not on any road
+            OnRoad = false; // Reset the flag if the car is not on any road
         }
 
-        if (currentRoad != null && currentRoad.CanCarMove())
+        else if (currentRoad != null && currentRoad.CanCarMove())
         {
+            bool movingTowardsEnding = currentRoad.IsCarMovingTowardsEnding(transform);
             rb.MovePosition(rb.position + movement * Time.deltaTime * moveSpeed);
-            if (!hasEnteredRoad)
-            {
-                Debug.Log("Moving car");
-                currentRoad.CarEntered();
-                hasEnteredRoad = true; // Set the flag to true after entering the road
+            if(!OnRoad && !entered){
+                Debug.Log("entered just now");
+                currentRoad.CarEntered(movingTowardsEnding);
+                OnRoad = true;
+                entered = true;
             }
+            // if (!hasEnteredRoad)
+            // {
+            //     Debug.Log("Moving car");
+            //     currentRoad.CarEntered(movingTowardsEnding);
+            //     hasEnteredRoad = true; // Set the flag to true after entering the road
+            // }
         }
         else
         {
-            if (hasEnteredRoad)
-            {
-                Debug.Log("Cannot move on this road");
-                hasEnteredRoad = false; // Reset the flag when exiting the road
-            }
+            Debug.Log("Cannot move on this road");
+            OnRoad = false;
         }
     }
 
@@ -100,6 +105,7 @@ public class moveford : MonoBehaviour
         if (road != null)
         {
             currentRoad = road;
+            Debug.Log(road);
         }
     }
 
@@ -109,7 +115,9 @@ public class moveford : MonoBehaviour
         if (road != null)
         {
             currentRoad.CarExited();
-            currentRoad = null;
+            //currentRoad = null;
+            OnRoad = false;
+            entered = false;
         }
     }
 }
