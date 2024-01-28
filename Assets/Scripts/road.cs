@@ -3,6 +3,8 @@ using UnityEngine;
 public class Road : MonoBehaviour
 {
     public int capacity = 10; // Initial capacity of the road
+    public Transform beginningPoint; // The beginning point of the road
+    public Transform endingPoint; // The ending point of the road
 
     // Function to check if the road has enough capacity for a car to travel
     public bool CanCarMove()
@@ -12,53 +14,66 @@ public class Road : MonoBehaviour
     }
 
     // Function to decrease the road capacity when a car enters
-    public void CarEntered()
+    public void CarEntered(bool movingTowardsEnding)
 {
     if (capacity > 0)
     {
-        capacity--;
-        Debug.Log("Car entered. Remaining capacity: " + capacity);
+        if (movingTowardsEnding)
+        {
+            capacity--;
+            Debug.Log("Car entered. Remaining capacity: " + capacity);
+        }
+        else
+        {
+            capacity++;
+            Debug.Log("Car entered. Remaining capacity: " + capacity);
+        }
     }
     else
     {
-        Debug.LogError("Capacity is already zero.");
+        Debug.Log("Capacity is already zero");
     }
 }
-
 
     // Function to increase the road capacity when a car exits (reverse direction)
     public void CarExited()
     {
-        if (!IsCarOnRoad())
-    {
-        capacity++;
         Debug.Log("Car exited. Remaining capacity: " + capacity);
-    }
+        
     }
 
     private bool IsCarOnRoad()
-{
-    // Implement your logic to check if the car is still on the road
-    // Return true if the car is on the road, false otherwise
-
-    Collider roadCollider = GetComponent<Collider>();
-
-    if (roadCollider == null)
     {
-        Debug.LogError("Road collider not found.");
-        return false;
+        // Return true if the car is on the road, false otherwise
+
+        Collider roadCollider = GetComponent<Collider>();
+
+        if (roadCollider == null)
+        {
+            Debug.LogError("Road collider not found.");
+            return false;
+        }
+
+        // Example condition (replace with your own)
+        float carX = transform.position.x;
+        float carZ = transform.position.z;
+        float roadX = this.transform.position.x;
+        float roadZ = this.transform.position.z;
+        float roadWidth = roadCollider.bounds.size.x;
+
+        return Mathf.Abs(carX - roadX) < roadWidth / 2f && Mathf.Abs(carZ - roadZ) < roadWidth / 2f;
     }
 
-    // Example condition (replace with your own)
-    float carX = transform.position.x;
-    float carZ = transform.position.z;
-    float roadX = this.transform.position.x;
-    float roadZ = this.transform.position.z;
-    float roadWidth = roadCollider.bounds.size.x;
+    // Function to determine the direction of car movement on the road
+    public bool IsCarMovingTowardsEnding(Transform carTransform)
+    {
+        Vector3 roadDirection = endingPoint.position - beginningPoint.position;
+        Vector3 carDirection = carTransform.forward;
 
-    return Mathf.Abs(carX - roadX) < roadWidth / 2f && Mathf.Abs(carZ - roadZ) < roadWidth / 2f;
-}
+        float dotProduct = Vector3.Dot(roadDirection.normalized, carDirection.normalized);
 
-
-
+        // If dot product is positive, car is moving towards the ending point
+        Debug.Log(dotProduct);
+        return dotProduct > 0f;
+    }
 }
