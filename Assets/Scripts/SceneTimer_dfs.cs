@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneTimer_dfs : MonoBehaviour
 {
-    public float sceneDuration = 10f;
+    public float sceneDuration = 240f;
     public GameObject gameOverPanel;
     public Logic_dfs logicScript; 
     public Text congratsText; 

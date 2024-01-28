@@ -5,9 +5,7 @@ public class move_dfs : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public Rigidbody rb;
-    int coins = 0;
     public Logic_dfs l;
-    private int coinsCollected = 0;
 
 
     void Update()
@@ -36,12 +34,6 @@ public class move_dfs : MonoBehaviour
         if (other.gameObject.CompareTag("Coin"))
         {
             l.addScore(1);
-            coinsCollected++;
-
-            if (coinsCollected == 8)
-            {
-                Debug.Log("Gameover! You collected 8 items.");
-            }
             Destroy(other.gameObject);
         }
         else if (other.gameObject.CompareTag("hint1"))
