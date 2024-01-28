@@ -11,8 +11,10 @@ public class Logic : MonoBehaviour
     static int Size = 9;     //Number of objects
     public Text[] alive = new Text[Size];
     public GameObject[] Players = new GameObject[Size];
+    public Text go;
     bool yaaraachu_irukeengalaa = false;
-    private string chapter = "Dhanan";//File NAME OF CHAPTERS SCENE
+    private string chapter = "chapters";//File NAME OF CHAPTERS SCENE
+    private float waiter = 0;
 
     public void addScore(int val)
     {
@@ -28,8 +30,16 @@ public class Logic : MonoBehaviour
         }
         if (!yaaraachu_irukeengalaa)
         {
-            Debug.Log("All dead");
-            SceneManager.LoadScene(chapter);
+            //Debug.Log("All dead");
+            go.text = "Well Played!";
+            waiter += Time.deltaTime;
+            if (waiter > 4f)
+            {
+                waiter = 0;
+                Debug.Log("All dead");
+                SceneManager.LoadScene(chapter);
+            }
+            
         }
         yaaraachu_irukeengalaa= false;
     }
