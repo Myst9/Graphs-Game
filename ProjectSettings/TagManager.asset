@@ -30,7 +30,8 @@ TagManager:
 =======
   - hint8
   - Logic
->>>>>>> 22d010648fec16e95b4182f3978a87393b3baf32
+  - Copy
+  - Done
   layers:
   - Default
   - TransparentFX
