@@ -65,6 +65,7 @@ public class Road : MonoBehaviour
         float dotProduct = Vector3.Dot(roadDirection.normalized, carDirection.normalized);
 
         // If dot product is positive, car is moving towards the ending point
+        //Debug.Log(dotProduct);
         return dotProduct >= 0f;
     }
 }
