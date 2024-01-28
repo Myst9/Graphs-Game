@@ -24,7 +24,7 @@ public class gameender : MonoBehaviour
 
         Debug.Log("Number of cars on destination road: " + carsOnDestinationRoad);
 
-        carCountText.text = "You took " + carsOnDestinationRoad.ToString() + "/6 cars back to the museum";
+        carCountText.text = "You took " + carsOnDestinationRoad.ToString() + "/6 cars back to the bank";
 
         EndGame();  // Call the EndGame method
     }
