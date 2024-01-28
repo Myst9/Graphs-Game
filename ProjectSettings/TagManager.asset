@@ -3,35 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-<<<<<<< HEAD
-=======
-  - Car
-  - Road
-  - Coin
-  - Copy
-  - building
-  - player
-  - hint1
-  - hint2
->>>>>>> 22d010648fec16e95b4182f3978a87393b3baf32
-  - hint3
-  - Coin
-  - hint8
-  - hint6
-  - hint4
-  - hint5
-  - hint7
-<<<<<<< HEAD
-  - hint2
-  - building
-  - player
-  - hint1
-=======
-  - hint8
-  - Logic
-  - Copy
-  - Done
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -39,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Road
+  - 
   - 
   - 
   - 
