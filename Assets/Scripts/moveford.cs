@@ -120,4 +120,10 @@ public class moveford : MonoBehaviour
             entered = false;
         }
     }
+
+    public bool IsOnDestinationRoad(string roadName)
+    {
+        Debug.Log(roadName);
+        return currentRoad != null && currentRoad.gameObject.name == roadName;
+    }
 }
