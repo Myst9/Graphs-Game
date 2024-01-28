@@ -7,7 +7,8 @@ public class moveford : MonoBehaviour
     public float moveSpeed = 5f;
     public Rigidbody rb;
     private Road currentRoad;
-    private bool hasEnteredRoad = false;
+    private bool OnRoad = false;
+    private bool entered = false;
 
     private static moveford currentlySelectedCar;
 
@@ -71,30 +72,30 @@ public class moveford : MonoBehaviour
         if (!currentRoad)
         {
             Debug.Log("No road");
-            hasEnteredRoad = false; // Reset the flag if the car is not on any road
+            OnRoad = false; // Reset the flag if the car is not on any road
         }
 
-        Debug.Log(currentRoad.CanCarMove());
-
-        if (currentRoad != null && currentRoad.CanCarMove())
+        else if (currentRoad != null && currentRoad.CanCarMove())
         {
             bool movingTowardsEnding = currentRoad.IsCarMovingTowardsEnding(transform);
-            Debug.Log("car direction" + movingTowardsEnding);
             rb.MovePosition(rb.position + movement * Time.deltaTime * moveSpeed);
-            if (!hasEnteredRoad)
-            {
-                Debug.Log("Moving car");
+            if(!OnRoad && !entered){
+                Debug.Log("entered just now");
                 currentRoad.CarEntered(movingTowardsEnding);
-                hasEnteredRoad = true; // Set the flag to true after entering the road
+                OnRoad = true;
+                entered = true;
             }
+            // if (!hasEnteredRoad)
+            // {
+            //     Debug.Log("Moving car");
+            //     currentRoad.CarEntered(movingTowardsEnding);
+            //     hasEnteredRoad = true; // Set the flag to true after entering the road
+            // }
         }
         else
         {
-            if (hasEnteredRoad)
-            {
-                Debug.Log("Cannot move on this road");
-                hasEnteredRoad = false; // Reset the flag when exiting the road
-            }
+            Debug.Log("Cannot move on this road");
+            OnRoad = false;
         }
     }
 
@@ -113,9 +114,10 @@ public class moveford : MonoBehaviour
         Road road = other.GetComponent<Road>();
         if (road != null)
         {
-            //bool movingTowardsBeginning = currentRoad.IsCarMovingTowardsEnding(transform);
             currentRoad.CarExited();
             //currentRoad = null;
+            OnRoad = false;
+            entered = false;
         }
     }
 }

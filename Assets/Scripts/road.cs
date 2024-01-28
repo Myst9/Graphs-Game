@@ -15,54 +15,46 @@ public class Road : MonoBehaviour
 
     // Function to decrease the road capacity when a car enters
     public void CarEntered(bool movingTowardsEnding)
-{
-    if (capacity > 0)
     {
         if (movingTowardsEnding)
         {
             capacity--;
-            Debug.Log("Car entered. Remaining capacity: " + capacity);
+            Debug.Log("Car entered. Capacity decreases. Remaining capacity: " + capacity);
         }
         else
         {
             capacity++;
-            Debug.Log("Car entered. Remaining capacity: " + capacity);
+             Debug.Log("Car entered. Capacity increases. Remaining capacity: " + capacity);
         }
     }
-    else
-    {
-        Debug.Log("Capacity is already zero");
-    }
-}
 
     // Function to increase the road capacity when a car exits (reverse direction)
     public void CarExited()
     {
         Debug.Log("Car exited. Remaining capacity: " + capacity);
-        
     }
 
-    private bool IsCarOnRoad()
-    {
-        // Return true if the car is on the road, false otherwise
+    // private bool IsCarOnRoad()
+    // {
+    //     // Return true if the car is on the road, false otherwise
 
-        Collider roadCollider = GetComponent<Collider>();
+    //     Collider roadCollider = GetComponent<Collider>();
 
-        if (roadCollider == null)
-        {
-            Debug.LogError("Road collider not found.");
-            return false;
-        }
+    //     if (roadCollider == null)
+    //     {
+    //         Debug.LogError("Road collider not found.");
+    //         return false;
+    //     }
 
-        // Example condition (replace with your own)
-        float carX = transform.position.x;
-        float carZ = transform.position.z;
-        float roadX = this.transform.position.x;
-        float roadZ = this.transform.position.z;
-        float roadWidth = roadCollider.bounds.size.x;
+    //     // Example condition (replace with your own)
+    //     float carX = transform.position.x;
+    //     float carZ = transform.position.z;
+    //     float roadX = this.transform.position.x;
+    //     float roadZ = this.transform.position.z;
+    //     float roadWidth = roadCollider.bounds.size.x;
 
-        return Mathf.Abs(carX - roadX) < roadWidth / 2f && Mathf.Abs(carZ - roadZ) < roadWidth / 2f;
-    }
+    //     return Mathf.Abs(carX - roadX) < roadWidth / 2f && Mathf.Abs(carZ - roadZ) < roadWidth / 2f;
+    // }
 
     // Function to determine the direction of car movement on the road
     public bool IsCarMovingTowardsEnding(Transform carTransform)
@@ -73,7 +65,6 @@ public class Road : MonoBehaviour
         float dotProduct = Vector3.Dot(roadDirection.normalized, carDirection.normalized);
 
         // If dot product is positive, car is moving towards the ending point
-        Debug.Log(dotProduct);
-        return dotProduct > 0f;
+        return dotProduct >= 0f;
     }
 }
