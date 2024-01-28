@@ -36,12 +36,28 @@ public class move : MonoBehaviour
     Vector3 movedir;
 
 
+    private float timer;
+    private float dead_time = 450;
     private void Start()
     {
         //rb = GetComponent<Rigidbody>();
         rb.freezeRotation= true;
+        timer = 0; 
         l = GameObject.FindGameObjectWithTag("Logic").GetComponent<Logic>();
         cs = GameObject.FindGameObjectWithTag("GameController").GetComponent<CamSwitch>();
+    }
+
+    void checkTime()
+    {
+        if(timer < dead_time)
+        {
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            timer = 0;
+            gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -49,7 +65,7 @@ public class move : MonoBehaviour
     {
         groundCheck();
         speedControl();
-       
+        checkTime();
         //Debug.Log("Prev Movem: " + movem);
         //movem = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z) * movem;
         //movem = Quaternion.Euler(xRot, yRot, zRot) * movem;
@@ -98,11 +114,16 @@ public class move : MonoBehaviour
         else if (other.gameObject.CompareTag("Done"))
         {
             Debug.Log("Player i done");
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
             Destroy(other.gameObject);
             cam.SetActive(false);
             cs.cam10.SetActive(true);
-            Destroy(cam);
+            //Destroy(cam);
+        }
+        else//Must be a spawner
+        {
+            dead_time += 300;
         }
     }
 
