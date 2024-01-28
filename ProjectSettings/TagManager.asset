@@ -13,12 +13,22 @@ TagManager:
   - hint1
   - hint2
   - hint3
+  - Coin
+  - hint8
+  - hint6
   - hint4
   - hint5
-  - hint6
   - hint7
+<<<<<<< HEAD
+  - hint2
+  - building
+  - player
+  - hint1
+=======
   - hint8
   - Logic
+  - Copy
+  - Done
   layers:
   - Default
   - TransparentFX
@@ -26,11 +36,12 @@ TagManager:
   - 
   - Water
   - UI
-  - Road
   - 
   - 
   - 
-  - groundMask
+  - 
+  - 
+  - 
   - 
   - 
   - 
