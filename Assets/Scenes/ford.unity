@@ -395,6 +395,48 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b3f5447e836ccf45b4f17e45301ea52, type: 3}
+--- !u!1 &64166935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 24ecb261e8ded224e9dcfdcd439be28b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1880980168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &64166939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64166935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67ff7cf3bf536044db4b7d1aa89a4509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capacity: 200
+  beginningPoint: {fileID: 283476324}
+  endingPoint: {fileID: 1260760446}
+--- !u!65 &64166940
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64166935}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.114131734, y: 0.0052778223, z: 0.6649836}
+  m_Center: {x: 0.009795354, y: 0.0023819401, z: 0.0004732163}
 --- !u!1 &66483003 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 24ecb261e8ded224e9dcfdcd439be28b,
@@ -771,6 +813,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca9d32739fe9a445887120c3b52b579, type: 3}
+--- !u!1 &283476323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 283476324}
+  m_Layer: 0
+  m_Name: Road2Start
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &283476324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283476323}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -162.5, y: 3.2, z: 59.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &287462488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2240,6 +2313,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24ecb261e8ded224e9dcfdcd439be28b, type: 3}
+--- !u!1 &1260760445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1260760446}
+  m_Layer: 0
+  m_Name: Road2End
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1260760446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260760445}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -98.1, y: 3.067562, z: 59.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1267648661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3157,7 +3261,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 24ecb261e8ded224e9dcfdcd439be28b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 64166940}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 24ecb261e8ded224e9dcfdcd439be28b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 64166939}
   m_SourcePrefab: {fileID: 100100000, guid: 24ecb261e8ded224e9dcfdcd439be28b, type: 3}
 --- !u!1001 &1893779886
 PrefabInstance:
@@ -3889,3 +4001,5 @@ SceneRoots:
   - {fileID: 1913991618}
   - {fileID: 906231597}
   - {fileID: 171043412}
+  - {fileID: 283476324}
+  - {fileID: 1260760446}
