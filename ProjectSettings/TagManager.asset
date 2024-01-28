@@ -3,30 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Car
-  - Road
-  - Coin
-  - Copy
-  - building
-  - player
-  - hint1
-  - hint2
-  - hint3
-  - Coin
-  - hint8
-  - hint6
-  - hint4
-  - hint5
-  - hint7
-<<<<<<< HEAD
-  - hint2
-  - building
-  - player
-  - hint1
+<<<<<<< Updated upstream
+  tags: []
 =======
-  - hint8
+  tags:
+  - Coin
   - Logic
+  - Copy
+  - Done
+>>>>>>> Stashed changes
   - Copy
   - Done
   layers:

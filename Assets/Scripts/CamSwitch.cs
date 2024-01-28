@@ -68,7 +68,7 @@ public class CamSwitch : MonoBehaviour
         }
         if (Input.GetButtonDown("0Key"))
         {
-            setFalse();
+            //setFalse();
             cam10.SetActive(true);
         }
     }
@@ -77,13 +77,13 @@ public class CamSwitch : MonoBehaviour
     {
         cam1.SetActive(false);
         cam2.SetActive(false);
-        /*cam3.SetActive(false);
+        cam3.SetActive(false);
         cam4.SetActive(false);
         cam5.SetActive(false);
         cam6.SetActive(false);
         cam7.SetActive(false);
         cam8.SetActive(false);
-        cam9.SetActive(false);*/
+        cam9.SetActive(false);
         cam10.SetActive(false);
     }
 }
