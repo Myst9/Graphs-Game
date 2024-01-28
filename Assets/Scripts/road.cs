@@ -10,7 +10,7 @@ public class Road : MonoBehaviour
     public bool CanCarMove()
     {
         Debug.Log(capacity);
-        return capacity > 0;
+        return capacity >= 0;
     }
 
     // Function to decrease the road capacity when a car enters
