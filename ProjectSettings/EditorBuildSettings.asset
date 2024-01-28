@@ -14,4 +14,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/chapters.unity
     guid: c5692967bb045d543b7761064986edbd
+  - enabled: 1
+    path: Assets/Scenes/story1.unity
+    guid: a7c23f184d039504f99d8cdb8684b03c
+  - enabled: 1
+    path: Assets/Scenes/DFS1.unity
+    guid: e937623101c4bd14e8d1c29984c9d6d3
+  - enabled: 1
+    path: Assets/Scenes/Dhanan.unity
+    guid: 98ee14117716a7f4db936c101ac99b21
+  - enabled: 1
+    path: Assets/Scenes/ford.unity
+    guid: fabc0e8bdf52d2746ac94124043e8a3d
+  - enabled: 1
+    path: Assets/Scenes/Try.unity
+    guid: 054ff738ad0f06340beb75f08719dc68
+  - enabled: 1
+    path: Assets/Scenes/story2.unity
+    guid: 2f65669f88c0845469d0cbd9eddf9511
+  - enabled: 1
+    path: Assets/Scenes/story3.unity
+    guid: 79cc147a4a5da244e8cc537f1874f791
   m_configObjects: {}
