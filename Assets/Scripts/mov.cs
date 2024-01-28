@@ -19,6 +19,7 @@ public class move : MonoBehaviour
 
 
     public Logic l;
+    public CamSwitch cs;
 
     public Transform orientation;
     public GameObject cam;
@@ -40,6 +41,7 @@ public class move : MonoBehaviour
         //rb = GetComponent<Rigidbody>();
         rb.freezeRotation= true;
         l = GameObject.FindGameObjectWithTag("Logic").GetComponent<Logic>();
+        cs = GameObject.FindGameObjectWithTag("GameController").GetComponent<CamSwitch>();
     }
 
     // Update is called once per frame
@@ -92,6 +94,15 @@ public class move : MonoBehaviour
         {
             l.addScore(1);
             Destroy(other.gameObject);
+        }
+        else if (other.gameObject.CompareTag("Done"))
+        {
+            Debug.Log("Player i done");
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+            cam.SetActive(false);
+            cs.cam10.SetActive(true);
+            Destroy(cam);
         }
     }
 
