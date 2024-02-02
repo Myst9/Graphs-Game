@@ -13,3 +13,6 @@ The algorithms we chose were:
 </ol>
 <br><br>
 We made a <b> 3D URP </b> game using Unity and CSharp(C#) to achieve this goal. Our game is divided into 4 chapters, each explaining one of the aforementioned algorithms without explicitly telling so.
+
+<br><br>
+Play our game online <a href="https://play.unity.com/mg/other/webgl-aqc"> here </a>
